@@ -71,7 +71,7 @@ input{
 }
 
 @media (min-width: 1500px){
-    .column.middle{width: 40%;background: yellowgreen;}
+    .column.middle{width: 40%;}
     .column.side{width:  30%;}
 }
 
@@ -80,7 +80,7 @@ input{
     .column.side{width:  0%;display: none;}
 }
 @media (max-height: 300px){
-    /* .form{margin-top: 0%;} */
+    .form{margin-top: 0%;}
     label{display: none;}
     .fhead{display: none;}
 }
