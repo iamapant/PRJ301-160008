@@ -69,7 +69,10 @@ input{
     font-size:3rem;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
-
+.loginFailed{
+    color: red;
+    display: none;
+}
 @media (min-width: 1500px){
     .column.middle{width: 40%;}
     .column.side{width:  30%;}

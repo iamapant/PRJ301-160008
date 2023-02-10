@@ -4,29 +4,29 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
 -->
 <html>
-
-<head>
-    <!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">-->
-    <link rel="stylesheet" href="indexcss.css">
-    <title>TODO supply a title</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-    <div class="row">
-        <div class="column side"></div>
-        <div class="column middle">
-            <form class="form" name="loginForm" action="login" method="POST">
-                <div class="fhead">Login</div>
-                <label for="user">Username:</label>
-                <input name="user" id="user" placeholder="Username" />
-                <label for="pwd">Password:</label>
-                <input name="pass" id="pwd" placeholder="Password" />
-                <input type="submit" value="Login" name="login" />
-            </form>
+    <head>
+        <!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">-->
+        <link rel="stylesheet" href="indexcss.css">
+        <title>Personal time management - Login</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="row">
+            <div class="column side"></div>
+            <div class="column middle">
+                <form class="form" name="loginForm" action="login" method="POST">
+                    <div class="fhead">Login</div>
+                    <label for="user">Username:</label>
+                    <input type="text" name="user" id="user" placeholder="Username" />
+                    <label for="pwd">Password:</label>
+                    <input type="password" name="pass" id="pwd" placeholder="Password" />
+                    <div class="loginFailed">Username or password is incorrect</div>
+                    <input type="submit" value="Login" name="login" />
+                </form>
+            </div>
+            <div class="column side"></div>
         </div>
-        <div class="column side"></div>
-    </div>
-</body>
+    </body>
 
 </html>
