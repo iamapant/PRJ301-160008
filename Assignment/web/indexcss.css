@@ -1,0 +1,100 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Feb 8, 2023, 2:48:59 PM
+    Author     : iamap
+*/
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.row{
+    padding: 0%;
+}
+/* Style the header */
+.header {
+    background-color: #f1f1f1;
+    padding: 30px;
+    text-align: center;
+    font-size: 35px;
+}
+
+/* Create three unequal columns that floats next to each other */
+.column {
+    float: left;
+    padding: 10px;
+    /*height: 300px;  Should be removed. Only for demonstration */
+}
+
+/* Left and right column */
+.column.side {
+    width: 20%;
+}
+
+/* Middle column */
+.column.middle {
+    /* background: grey; */
+    width: 60%;
+}
+
+.form{
+    margin:auto;
+    padding: 7vh 4vw;
+    margin-top: 20vh;
+    max-width: 80vw;
+    border: 1px solid black;
+    background: #00F5C8;
+    float:none;
+}
+
+input{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.fhead{
+    display: block;
+    text-align: center;
+    padding-bottom: 20px;
+    font-size:3rem;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+@media (min-width: 1500px){
+    .column.middle{width: 40%;background: yellowgreen;}
+    .column.side{width:  30%;}
+}
+
+@media (max-width: 600px){
+    .column.middle{width: 100%;}
+    .column.side{width:  0%;display: none;}
+}
+@media (max-height: 300px){
+    /* .form{margin-top: 0%;} */
+    label{display: none;}
+    .fhead{display: none;}
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Style the footer */
+.footer {
+    background-color: #f1f1f1;
+    padding: 10px;
+    text-align: center;
+}
