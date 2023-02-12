@@ -11,6 +11,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 }
 
 body {
+    background: #327aba;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -49,7 +50,7 @@ body {
     margin-top: 20vh;
     max-width: 80vw;
     border: 1px solid black;
-    background: #00F5C8;
+    background: white;
     float:none;
 }
 
@@ -69,10 +70,16 @@ input{
     font-size:3rem;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
-.loginFailed{
-    color: red;
+.loginStatus{
     display: none;
+    visibility: hidden;
 }
+
+.msg{
+    margin-top: 10px;
+    
+}
+
 @media (min-width: 1500px){
     .column.middle{width: 40%;}
     .column.side{width:  30%;}

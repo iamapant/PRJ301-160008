@@ -6,15 +6,15 @@
     </servlet>
     <servlet>
         <servlet-name>loginServ</servlet-name>
-        <servlet-class>loginServ</servlet-class>
+        <jsp-file>/login.jsp</jsp-file>
     </servlet>
     <servlet>
         <servlet-name>Welcome</servlet-name>
         <servlet-class>Welcome</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>lFailed</servlet-name>
-        <servlet-class>lFailed</servlet-class>
+        <servlet-name>loginCheck</servlet-name>
+        <servlet-class>loginServ</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>TestS</servlet-name>
@@ -29,12 +29,15 @@
         <url-pattern>/Welcome</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>lFailed</servlet-name>
-        <url-pattern>/lFailed</url-pattern>
+        <servlet-name>loginCheck</servlet-name>
+        <url-pattern>/loginCheck</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
 </web-app>

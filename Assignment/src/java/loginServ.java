@@ -80,7 +80,11 @@ public class loginServ extends HttpServlet {
 //        out.print("</body></html>");
         
         if(loginSuccess(user,pass))response.sendRedirect("Welcome");
-        else response.sendRedirect("lFailed");
+        else {
+            request.setAttribute("errorMessage", " Login failed!");
+//            response.sendRedirect("login");
+            request.getRequestDispatcher("login").forward(request, response);
+        }
 
 //        response.sendRedirect("index.html");
     }
