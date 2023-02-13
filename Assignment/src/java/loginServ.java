@@ -81,7 +81,7 @@ public class loginServ extends HttpServlet {
         
         if(loginSuccess(user,pass))response.sendRedirect("Welcome");
         else {
-            request.setAttribute("errorMessage", " Login failed!");
+            request.setAttribute("errorMessage", "Login failed!");
 //            response.sendRedirect("login");
             request.getRequestDispatcher("login").forward(request, response);
         }

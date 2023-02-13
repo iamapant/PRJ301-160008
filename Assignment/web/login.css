@@ -71,8 +71,17 @@ input{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 .loginStatus{
+    width: 0%;
+    height:0px;
     display: none;
     visibility: hidden;
+    text-align: justify;
+    text-indent: 5%;
+    vertical-align: central;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: #ff8080;
+    color: whitesmoke;
 }
 
 .msg{

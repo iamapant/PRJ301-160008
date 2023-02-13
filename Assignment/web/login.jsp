@@ -16,15 +16,8 @@
         out.println("<style>.loginStatus{visibility:visible;"
 +"    width: 100%;"
 +"    height:40px; "
-+"    text-align: justify;"
-+"    text-indent: 5%;"
-+"    vertical-align:center;"
-+"    margin-top: 10px;"
-+"    margin-bottom: 10px;"
 +"    display: inline-block;"
-+"    background: #ff8080;"
-+"    color: yellow;"
-+"    display: inline-block;}</style>");
++"           }</style>");
     }
         %>
       <title>Personal time management - Login</title>
@@ -32,7 +25,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <button class="backbutton" onclick="index.html">Go Back</button>
+        <button class="backbutton" onclick="location.href ='index.html'">Go Back</button>
         <div class="row">
             <div class="column side"></div>
             <div class="column middle">
