@@ -1,8 +1,8 @@
 package DB;
-import java.util.Date;
+import java.sql.Date;
 
 public class User {
-    String id;
+    int id;
     String name;
     String email;
     String pass;
@@ -11,7 +11,7 @@ public class User {
     public User() {
     }
 
-    public User(String id, String name, String email, String pass, Date dob) {
+    public User(int id, String name, String email, String pass, Date dob) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -19,11 +19,11 @@ public class User {
         this.dob = dob;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

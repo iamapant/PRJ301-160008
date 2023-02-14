@@ -36,13 +36,13 @@
                     <label for="pwd">Password:</label>
                     <input type="password" name="pass" id="pwd" placeholder="Password" required/>
                     <div id="loginStatus" class="loginStatus"><p class="msg">
-                        <%
-    if(request.getAttribute("errorMessage")!=null)
-    {
-        out.println(request.getAttribute("errorMessage"));
-    }
-    %></p></div>
+                        <%if(request.getAttribute("errorMessage")!=null)
+                        {
+                            out.println(request.getAttribute("errorMessage"));
+                        }
+                        %></p></div>
                     <input type="submit" value="Login" name="login" />
+                    <div class="bottom-text"><a href="create">Create account?</a> Or <a href="forgot">forgot password.</a></div>
                 </form>
             </div>
             <div class="column side"></div>
