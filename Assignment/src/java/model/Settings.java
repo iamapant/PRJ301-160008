@@ -1,4 +1,4 @@
-package DB;
+package model;
 import java.sql.*;
 
 public class Settings {
@@ -26,6 +26,7 @@ public class Settings {
     public void setId(int id) {
         this.id = id;
     }
+
 
     public Time getQ_Notice() {
         return Q_Notice;

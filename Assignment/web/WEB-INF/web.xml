@@ -9,10 +9,6 @@
         <jsp-file>/login.jsp</jsp-file>
     </servlet>
     <servlet>
-        <servlet-name>Welcome</servlet-name>
-        <servlet-class>Welcome</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>loginCheck</servlet-name>
         <servlet-class>loginServ</servlet-class>
     </servlet>
@@ -23,10 +19,6 @@
     <servlet-mapping>
         <servlet-name>loginServ</servlet-name>
         <url-pattern>/login</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Welcome</servlet-name>
-        <url-pattern>/Welcome</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>loginCheck</servlet-name>

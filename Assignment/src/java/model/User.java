@@ -1,4 +1,4 @@
-package DB;
+package model;
 import java.sql.Date;
 
 public class User {
@@ -7,11 +7,12 @@ public class User {
     String email;
     String pass;
     Date dob;
+    Settings setting;
 
     public User() {
     }
 
-    public User(int id, String name, String email, String pass, Date dob) {
+    public User(int id,String name, String email, String pass, Date dob) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -57,6 +58,14 @@ public class User {
 
     public void setDob(Date dob) {
         this.dob = dob;
+    }
+
+    public Settings getSetting() {
+        return setting;
+    }
+
+    public void setSetting(Settings setting) {
+        this.setting = setting;
     }
     
         

@@ -10,8 +10,8 @@
     <head>
         <!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">-->
         <link rel="stylesheet" href="login.css">
-
-       <% 
+        
+        <% 
     if(request.getAttribute("errorMessage")!=null){
         out.println("<style>.loginStatus{visibility:visible;"
 +"    width: 100%;"

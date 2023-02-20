@@ -1,22 +1,24 @@
-package DB;
+package model;
 import java.sql.*;
 
-public class Notices {
+public class Notice {
     int nid;
     int id;
     String title;
     String descr;
     Timestamp A_Time;
-
-    public Notices() {
+    int repeatable;
+    
+    public Notice() {
     }
 
-    public Notices(int nid, int id, String title, String descr, Timestamp A_Time) {
+    public Notice(int nid, int id, String title, String descr, Timestamp A_Time, int repeatable) {
         this.nid = nid;
         this.id = id;
         this.title = title;
         this.descr = descr;
         this.A_Time = A_Time;
+        this.repeatable = repeatable;
     }
 
     public int getNid() {
@@ -57,6 +59,14 @@ public class Notices {
 
     public void setA_Time(Timestamp A_Time) {
         this.A_Time = A_Time;
+    }
+
+    public int getRepeatable() {
+        return repeatable;
+    }
+
+    public void setRepeatable(int repeatable) {
+        this.repeatable = repeatable;
     }
 
 }

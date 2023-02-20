@@ -3,12 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
+import DB.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import model.User;
 
 /**
  *
@@ -28,18 +31,29 @@ public class loginServ extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet loginServ</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet loginServ at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        
+        String user = request.getParameter("user");
+        String pass = request.getParameter("pass");
+        
+        User u = loginSuccess(user,pass);
+        if(u != null){
+            if(u.getId() == 0){
+                request.setAttribute("errorMessage", "Cannot connect to server!");
+                request.getRequestDispatcher("login").forward(request, response);
+            }
+            else{
+                request.setAttribute("currentUser", u);
+                request.getRequestDispatcher("main.jsp").forward(request, response);
+            }
         }
+        else {
+            request.setAttribute("errorMessage", "Username or password incorrect!");
+            request.getRequestDispatcher("login").forward(request, response);
+//            response.sendRedirect("login");
+        }
+
+//        response.sendRedirect("index.html");
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -68,30 +82,9 @@ public class loginServ extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String user = request.getParameter("user");
-        String pass = request.getParameter("pass");
-        
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        
-//        out.print("<html><body>");
-//        out.print("<p>" + user + " " + pass + "</p>");
-//        out.print("</body></html>");
-        
-        if(loginSuccess(user,pass))response.sendRedirect("Welcome");
-        else {
-            request.setAttribute("errorMessage", "Login failed!");
-//            response.sendRedirect("login");
-            request.getRequestDispatcher("login").forward(request, response);
-        }
-
-//        response.sendRedirect("index.html");
+        processRequest(request, response);
     }
 
-    boolean loginSuccess(String user, String pass){
-        return false;
-    }
     
     /**
      * Returns a short description of the servlet.
@@ -103,4 +96,17 @@ public class loginServ extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    User loginSuccess(String user, String pass){
+        UserDAO ud = new UserDAO();
+        if(!ud.getUsers().isEmpty()){
+            ArrayList<User> ul = ud.getUsers();
+            for(User u:ul){
+                if((u.getName().equals(user) || u.getEmail().equals(user)) && u.getPass().equals(pass)) return u;
+            }
+        }else {
+            User u = new User();
+            u.setId(0);
+        }
+        return null;
+    }
 }

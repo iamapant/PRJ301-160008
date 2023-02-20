@@ -1,21 +1,21 @@
 package DB;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class SugNotice {
     int SID;
-    String title;
-    String descr;
-    Date A_Date;
+    String Title;
+    String Descr;
+    Timestamp Alert_Time;
 
     public SugNotice() {
     }
 
-    public SugNotice(int SID, String title, String descr, Date A_Date) {
+    public SugNotice(int SID, String Title, String Descr, Timestamp Alert_Time) {
         this.SID = SID;
-        this.title = title;
-        this.descr = descr;
-        this.A_Date = A_Date;
+        this.Title = Title;
+        this.Descr = Descr;
+        this.Alert_Time = Alert_Time;
     }
 
     public int getSID() {
@@ -27,27 +27,27 @@ public class SugNotice {
     }
 
     public String getTitle() {
-        return title;
+        return Title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTitle(String Title) {
+        this.Title = Title;
     }
 
     public String getDescr() {
-        return descr;
+        return Descr;
     }
 
-    public void setDescr(String descr) {
-        this.descr = descr;
+    public void setDescr(String Descr) {
+        this.Descr = Descr;
     }
 
-    public Date getA_Date() {
-        return A_Date;
+    public Timestamp getAlert_Time() {
+        return Alert_Time;
     }
 
-    public void setA_Date(Date A_Date) {
-        this.A_Date = A_Date;
+    public void setAlert_Time(Timestamp Alert_Time) {
+        this.Alert_Time = Alert_Time;
     }
     
 }

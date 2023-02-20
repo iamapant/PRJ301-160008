@@ -1,0 +1,65 @@
+html, body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+    /*display: flex;*/
+    /*justify-content: space-between;*/
+}
+
+.ribbon{
+    /* float: left; */
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+    margin:auto;
+    background: yellow;
+}
+.setting{
+    border: none;
+    display: inline-block;
+    padding: 8px 16px;
+    vertical-align: middle;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    background-color: inherit;
+    text-align: center;
+    font-size: larger;
+    cursor: pointer;
+    white-space: nowrap
+}
+.settingBtn{
+    /* border: none; */
+    height: 100%;
+    margin: 0%;
+    /*padding: 100%;*/ 
+    background-color: transparent;
+    /*opacity: 0.3;*/
+}
+.left{
+    float: left;
+    background: blue;
+    width: 75%;
+    height: 200%;
+}
+.right{
+    background: red;
+    position: sticky;
+    width: 25%;
+    height: 100%;
+    z-index: -1;
+    position: fixed;
+    margin-left: 75%;
+    float: right;
+    padding: 50px;
+    /* overflow: hidden; */
+}
+.upcoming{
+    background: indigo;
+    z-index: 1;
+    padding-top: 200px;
+    height: 50px;
+}
+.calendar{
+}
