@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpSession;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import static java.util.Objects.nonNull;
 import model.Settings;
 import model.User;
@@ -84,9 +85,28 @@ public class createServ extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        processRequest(request, response);
         
         UserDAO ud = new UserDAO();
+        ArrayList<User> ul = ud.getUsers();
+        
+        //TODO CHECK NULL
+        boolean isName = false;
+        boolean isMail = false;
+        for(User user : ul){
+             if(user.getName().equals(request.getParameter("username")) || user.getEmail().equals(request.getParameter("username"))) isName = true;
+             if(user.getName().equals(request.getParameter("email")) || user.getEmail().equals(request.getParameter("email"))) isMail = true;
+        }
+        
+        String msg = "";
+        if(isName)msg += "user";
+        if(isMail)msg += ".mail";
+        if(!msg.equals("")){
+            request.setAttribute("createMessage", msg);
+            request.getRequestDispatcher("create.jsp").forward(request, response);
+            return;
+        }
+        
         User u = new User();
         
         u.setName(request.getParameter("username"));
@@ -95,40 +115,6 @@ public class createServ extends HttpServlet {
         
 //        User v = ud.getUserByLogin(u.getName(), u.getPass());
 
-        //TODO CHECK NULL
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        if(ud.getUserByName(u.getName()).isEmpty()){
-            request.setAttribute("createMessage", "user");
-            if(ud.getUserByName(u.getEmail()).isEmpty()){
-                request.setAttribute("createMessage", "user.email"+ud.getUserByLogin(u.getName(), u.getPass()).getName());
-                request.getRequestDispatcher("create.jsp").forward(request, response);
-            }
-            request.getRequestDispatcher("create.jsp").forward(request, response);
-        }if(ud.getUserByName(u.getEmail()).isEmpty()){
-            request.setAttribute("createMessage", "email");
-            request.getRequestDispatcher("create.jsp").forward(request, response);
-        }
         
         u.setDob((Date)request.getAttribute("dob"));
         Settings s = new Settings();

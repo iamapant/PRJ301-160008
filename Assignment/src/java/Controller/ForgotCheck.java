@@ -1,3 +1,5 @@
+package Controller;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
@@ -10,6 +12,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import model.User;
 
 /**
  *
@@ -45,24 +49,21 @@ public class ForgotCheck extends HttpServlet {
         String fEmail = request.getParameter("f_email");
         
         UserDAO ud = new UserDAO();
-        if(ud.getUserByName(fUser).getName().equals(ud.getUserByName(fEmail).getName())){
-            
-            
-            
-            
-            
-            
-            
-            
-            //TODO CHECK NULL
-            if(ud.getUserByName(fUser) == null){
-                request.setAttribute("returned", "error.user");
-            }
-            else{
-                request.setAttribute("returned", "passed");
+        ArrayList<User> ul = ud.getUsers();
+        
+        boolean checkName = false;
+        boolean checkMatch = false;
+        for(User u : ul){
+            if(u.getName().equals(fUser)){
+                if(u.getEmail().equals(fEmail))checkMatch = true;
+                checkName = true;
             }
         }
-        else request.setAttribute("returned", "error.match"+fUser+fEmail);
+        String msg = "error";
+        if(!checkName)msg += ".user";
+        if(checkName && !checkMatch)msg += ".match";
+        if(!msg.equals("error"))request.setAttribute("returned", msg);
+        else request.setAttribute("returned", "passed");
         request.getRequestDispatcher("forgot.jsp").forward(request, response);
     }
 

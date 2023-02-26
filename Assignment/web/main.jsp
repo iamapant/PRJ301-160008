@@ -1,5 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import = "model.User"  %>
+<%@page import = "DB.UserDAO"  %>
+<%@page import = "java.util.ArrayList"  %>
 <%@page import="jakarta.servlet.http.HttpServletResponse" %>
 
 <!DOCTYPE html>
@@ -10,14 +12,17 @@
         <link rel="stylesheet" href="./css/main.css">
         <% 
             //TODO CHECK NULL
-            
+            UserDAO ud = new UserDAO();
+            ArrayList<User> ul = ud.getUsers();
             
             
             User u = new User();
             u =(User)session.getAttribute("user"); 
-            if(u == null || u.isEmpty()){
-                response.sendRedirect("login.jsp");
-            } 
+            boolean check = false;
+            for(User user : ul){
+                if(user.equals(u))check = true;
+            }
+            if(!check)request.getRequestDispatcher("login.jsp").forward(request,response);
         %>
     </head>
     <body>

@@ -22,7 +22,7 @@
     </servlet>
     <servlet>
         <servlet-name>ForgotCheck</servlet-name>
-        <servlet-class>ForgotCheck</servlet-class>
+        <servlet-class>Controller.ForgotCheck</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>loginCheck</servlet-name>
