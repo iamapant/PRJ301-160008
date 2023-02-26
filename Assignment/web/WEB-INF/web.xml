@@ -1,28 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>TestS</servlet-name>
-        <jsp-file>/Test.jsp</jsp-file>
-    </servlet>
-    <servlet>
-        <servlet-name>loginServ</servlet-name>
-        <jsp-file>/login.jsp</jsp-file>
-    </servlet>
-    <servlet>
         <servlet-name>loginCheck</servlet-name>
-        <servlet-class>loginServ</servlet-class>
+        <servlet-class>Controller.loginServ</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>main</servlet-name>
+        <jsp-file>/main.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>createServ</servlet-name>
+        <servlet-class>Controller.createServ</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>forgotServ</servlet-name>
+        <servlet-class>Controller.forgotServ</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>confirm-info</servlet-name>
+        <jsp-file>/confirm-info.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>ForgotCheck</servlet-name>
+        <servlet-class>ForgotCheck</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>TestS</servlet-name>
-        <url-pattern>/Test</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>loginServ</servlet-name>
+        <servlet-name>loginCheck</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>loginCheck</servlet-name>
-        <url-pattern>/loginCheck</url-pattern>
+        <servlet-name>main</servlet-name>
+        <url-pattern>/main</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>createServ</servlet-name>
+        <url-pattern>/create</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>forgotServ</servlet-name>
+        <url-pattern>/forgot</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>confirm-info</servlet-name>
+        <url-pattern>/confirm-info</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForgotCheck</servlet-name>
+        <url-pattern>/f_check</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

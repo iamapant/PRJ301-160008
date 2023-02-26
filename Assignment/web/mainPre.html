@@ -9,24 +9,32 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="main.css">
+        <link rel="stylesheet" href="./css/main.css">
     </head>
     <body>
         <div class="ribbon">
-            <div class="setting">☰</div>
+            <div class="setting">
+                <input type="submit" value="☰" class="settingBtn" id="settingBtn" onmouseover="this.style.backgroundColor = 'green'" onmouseout="this.style.backgroundColor = 'transparent'" />
+            </div>
         </div>
         <div class="left">
             <div class="upcoming">
-                b
+                a
             </div>
             <div class="calendar">
-                c
+                b
             </div>
         </div>
         <div class="right">
             <div class="suggestion">
-                d
+                c
             </div>
         </div>
+    </body>
+    <script>
+        function chgBG(){
+                document.getElementsById("ribbon").style.background = red;
+        }
+    </script>
     </body>
 </html>

@@ -17,7 +17,7 @@ import model.User;
  *
  * @author iamap
  */
-public class NoticesDAO extends BaseDAO<Notice>{
+public class NoticesDAO extends DBContext{
     
     public ArrayList<Notice> getNotices(User u){
         ArrayList<Notice> nl = new ArrayList<>();

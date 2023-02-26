@@ -83,4 +83,5 @@ public class SettingsDAO extends DBContext {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE,null,ex);              
         }
     }
+    
 }

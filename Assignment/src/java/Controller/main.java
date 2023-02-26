@@ -1,8 +1,12 @@
+package Controller;
+
 
 import DB.NoticesDAO;
 import DB.SettingsDAO;
 import DB.UserDAO;
 import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import model.Notice;
 import model.Settings;
@@ -18,25 +22,34 @@ import model.User;
  * @author iamap
  */
 public class main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         
+//        SimpleDateFormat df = new SimpleDateFormat("hh:mm");
+//        System.out.println(Time.valueOf("05:00:00"));
         
         User u = new User();
         u.setId(1);
         UserDAO ud  = new UserDAO();
+        if(ud.getUserByName("e").getName() == null){
+            System.out.println("aaaaa");
+        }
+        else 
+            System.out.println(ud.getUserByName("e").getName());
+//        System.out.println(ud.getUserByLogin("b", "a").getName());
+        
 //        u.setId(2);
 //        u.setName("NC");
-        u.setName("a@a.a");
-        u.setPass("a");
+//        u.setName("a@a.a");
+//        u.setPass("a");
 //        
 //        ud.insertUser(u);
-        List<User> list = ud.getUsers();
-        User n = new User();
-        for (User a :list) {
-            if((a.getName().equals(u.getName()) || a.getEmail().equals(u.getName())) && a.getPass().equals(u.getPass())) n = a;
-        }    
-        System.out.println(n.getEmail());
-        
+//        List<User> list = ud.getUsers();
+//        User n = new User();
+//        for (User a :list) {
+//            if((a.getName().equals(u.getName()) || a.getEmail().equals(u.getName())) && a.getPass().equals(u.getPass())) n = a;
+//        }    
+//        System.out.println(n.getEmail());
+//        
 
 //        SettingsDAO sd = new SettingsDAO();
 //        Settings s = sd.getSettings(u);

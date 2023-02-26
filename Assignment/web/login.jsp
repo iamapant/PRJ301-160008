@@ -9,11 +9,11 @@
 <html>
     <head>
         <!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">-->
-        <link rel="stylesheet" href="login.css">
+        <link rel="stylesheet" href="./css/login.css">
         
         <% 
     if(request.getAttribute("errorMessage")!=null){
-        out.println("<style>.loginStatus{visibility:visible;"
+        out.println("<style>.status{visibility:visible;"
 +"    width: 100%;"
 +"    height:40px; "
 +"    display: inline-block;"
@@ -25,24 +25,28 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <button class="backbutton" onclick="location.href ='index.html'">Go Back</button>
         <div class="row">
-            <div class="column side"></div>
+            <div class="column side">
+            <button class="backbutton" onclick="location.href ='./'">Go Back</button></div>
             <div class="column middle">
-                <form class="form" name="loginForm" action="loginCheck" method="POST">
+                <form class="form" name="loginForm" action="login" method="POST">
                     <div class="fhead">Login</div>
                     <label for="user">Username:</label>
-                    <input type="text" name="user" id="user" placeholder="Username" autofocus required />
+                    <input type="text" name="username" id="username" placeholder="Username" autofocus required />
                     <label for="pwd">Password:</label>
-                    <input type="password" name="pass" id="pwd" placeholder="Password" required/>
-                    <div id="loginStatus" class="loginStatus"><p class="msg">
+                    <input type="password" name="password" id="pwd" placeholder="Password" required/>
+                    <div id="status" class="loginStatus"><p class="msg">
                         <%if(request.getAttribute("errorMessage")!=null)
                         {
                             out.println(request.getAttribute("errorMessage"));
                         }
-                        %></p></div>
+                        %></p>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="rememberme" id="rm" value="ON" style="display:inline;width: 10%;"/><label for="rm" name="rememberme">Remember me?</label>
+                    </div>
                     <input type="submit" value="Login" name="login" />
-                    <div class="bottom-text"><a href="create">Create account?</a> Or <a href="forgot">forgot password.</a></div>
+                    <div class="bottom-text"><a href="create">Create account?</a> Or <a href="forgot.jsp">forgot password.</a></div>
                 </form>
             </div>
             <div class="column side"></div>

@@ -54,7 +54,7 @@ body {
     float:none;
 }
 
-input{
+input,.disableAT{
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -70,7 +70,7 @@ input{
     font-size:3rem;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
-.loginStatus{
+.status{
     width: 0%;
     height:0px;
     display: none;
@@ -84,9 +84,29 @@ input{
     color: whitesmoke;
 }
 
+.column.qn{
+    padding: 0%;
+    /*width: 33%;*/
+    display: flex;
+    flex-flow: row;
+    text-align: right;
+    margin-right: 20%;
+    margin-left: 5%;
+}
+.column.qn.r{
+    margin: 0px;
+    margin-right: 5%;
+    float: right;
+}
 .msg{
     margin-top: 10px;
-    
+}
+.descr{
+    margin-bottom: 20px;
+    margin-top: 5px;
+    display: block;
+    color: #327aba;
+    font-weight: bold;
 }
 
 @media (min-width: 1500px){

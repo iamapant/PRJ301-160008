@@ -48,8 +48,35 @@ public class UserDAO extends SettingsDAO {
                 v.setEmail(rs.getString("Email"));
                 v.setPass(rs.getString("Pass"));
                 v.setDob(rs.getDate("DOB"));
+                setSettings(v);
                 return v;
             }
+        }
+        catch(SQLException ex){
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE,null,ex);
+        }
+        return null;
+    }
+    
+    public User getUserByLogin(String username, String password){
+        try{
+            String sql = "select [id],[uName],[Email],[Pass],[DOB] from Users where (uName like ? or Email like ?) and Pass like ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, username);
+            ps.setString(2, username);
+            ps.setString(3, password);
+            ResultSet rs = ps.executeQuery();
+            
+            User u = new User();
+            if(rs.next()){
+                u.setId(rs.getInt("id"));
+                u.setName(rs.getString("uName"));
+                u.setEmail(rs.getString("Email"));
+                u.setPass(rs.getString("Pass"));
+                u.setDob(rs.getDate("DOB"));
+                setSettings(u);
+            }
+            return u;
         }
         catch(SQLException ex){
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE,null,ex);
@@ -66,6 +93,7 @@ public class UserDAO extends SettingsDAO {
             if(u.getEmail() != null)ps.setString(2, u.getEmail());else ps.setString(2, "N'"+u.getEmail()+"'");
             if(u.getPass() != null)ps.setString(3, u.getPass());else ps.setString(3, "N'"+u.getPass()+"'");
             if(u.getDob()!= null)ps.setDate(4, u.getDob());else ps.setDate(4, u.getDob());
+            updateSettings(u);
             ps.executeUpdate();
         }
         catch(SQLException ex){
@@ -104,5 +132,30 @@ public class UserDAO extends SettingsDAO {
         catch(SQLException ex){
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE,null,ex);
         }
+    }
+
+    public User getUserByName(String name) {
+        try{
+            String sql = "select [id],[uName],[Email],[Pass],[DOB] from Users where uName like ? or Email like ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, name);
+            ps.setString(2, name);
+            ResultSet rs = ps.executeQuery();
+            
+            User u = new User();
+            if(rs.next()){
+                u.setId(rs.getInt("id"));
+                u.setName(rs.getString("uName"));
+                u.setEmail(rs.getString("Email"));
+                u.setPass(rs.getString("Pass"));
+                u.setDob(rs.getDate("DOB"));
+                setSettings(u);
+            }
+            return u;
+        }
+        catch(SQLException ex){
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE,null,ex);
+        }
+        return null;        
     }
 }

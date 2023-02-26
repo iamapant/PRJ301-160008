@@ -67,6 +67,10 @@ public class User {
     public void setSetting(Settings setting) {
         this.setting = setting;
     }
-    
+     
+    public boolean isEmpty(){
+        if (this == null)return true;
+        return name == null && email == null && pass == null;
+    }
         
 }

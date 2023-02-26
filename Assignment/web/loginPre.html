@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">-->
+        <link rel="stylesheet" href="./css/login.css">
+
+    <body>
+        <button class="backbutton" onclick="location.href ='index.html'">Go Back</button>
+        <div class="row">
+            <div class="column side"></div>
+            <div class="column middle">
+                <form class="form" name="loginForm" action="login" method="POST">
+                    <div class="fhead">Login</div>
+                    <label for="user">Username:</label>
+                    <input type="text" name="username" id="username" placeholder="Username" autofocus required />
+                    <label for="pwd">Password:</label>
+                    <input type="password" name="pass" id="pwd" placeholder="Password" required/>
+                    <div>
+                        <input type="checkbox" name="rememberme" id="rm" value="ON" style="display:inline;width: 10%;"/><label for="rm">Remember me?</label>
+                    </div>
+                    <input type="submit" value="Login" name="login" />
+                    <div class="bottom-text"><a href="create">Create account?</a> Or <a href="forgot">forgot password.</a></div>
+                </form>
+            </div>
+            <div class="column side"></div>
+        </div>
+    </body>
+</html>

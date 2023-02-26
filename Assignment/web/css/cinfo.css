@@ -1,0 +1,120 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: #327aba;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.row{
+    padding: 0%;
+}
+/* Style the header */
+.header {
+    background-color: #f1f1f1;
+    padding: 30px;
+    text-align: center;
+    font-size: 35px;
+}
+
+/* Create three unequal columns that floats next to each other */
+.column {
+    float: left;
+    padding: 10px;
+    /*height: 300px;  Should be removed. Only for demonstration */
+}
+
+/* Left and right column */
+.column.side {
+    width: 20%;
+}
+
+/* Middle column */
+.column.middle {
+    /* background: grey; */
+    width: 60%;
+}
+
+.form{
+    margin:auto;
+    padding: 7vh 4vw;
+    margin-top: 20vh;
+    max-width: 80vw;
+    border: 1px solid black;
+    background: white;
+    float:none;
+}
+
+input{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.fhead{
+    display: block;
+    text-align: center;
+    padding-bottom: 20px;
+    font-size:3rem;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.status{
+    width: 0%;
+    height:0px;
+    display: none;
+    visibility: hidden;
+    text-align: justify;
+    text-indent: 5%;
+    vertical-align: central;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: #ff8080;
+    color: whitesmoke;
+}
+
+label {
+    display: inline-block;
+    width: 30%;
+    margin-left: 20px;
+}
+
+p{
+    width:auto;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+}
+
+@media (min-width: 1500px){
+    .column.middle{width: 40%;}
+    .column.side{width:  30%;}
+}
+
+@media (max-width: 600px){
+    .column.middle{width: 100%;}
+    .column.side{width:  0%;display: none;}
+}
+@media (max-height: 300px){
+    .form{margin-top: 0%;}
+    label{display: none;}
+    .fhead{display: none;}
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Style the footer */
+.footer {
+    background-color: #f1f1f1;
+    padding: 10px;
+    text-align: center;
+}

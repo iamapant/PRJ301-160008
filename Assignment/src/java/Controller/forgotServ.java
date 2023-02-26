@@ -2,6 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+package Controller;
 
 import DB.UserDAO;
 import java.io.IOException;
@@ -10,14 +11,13 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import model.User;
 
 /**
  *
  * @author iamap
  */
-public class loginServ extends HttpServlet {
+public class forgotServ extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,29 +31,19 @@ public class loginServ extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        String user = request.getParameter("user");
-        String pass = request.getParameter("pass");
-        
-        User u = loginSuccess(user,pass);
-        if(u != null){
-            if(u.getId() == 0){
-                request.setAttribute("errorMessage", "Cannot connect to server!");
-                request.getRequestDispatcher("login").forward(request, response);
-            }
-            else{
-                request.setAttribute("currentUser", u);
-                request.getRequestDispatcher("main.jsp").forward(request, response);
-            }
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Update password</title>");            
+            out.println("</head>");
+            out.println("<body onload=\"setTimeout(function(){document.location = 'login.jsp'}, 3000)\">");
+            out.println("<p>Update password successfully! Redirecting. . . </p>");
+            out.println("</body>");
+            out.println("</html>");
+            
         }
-        else {
-            request.setAttribute("errorMessage", "Username or password incorrect!");
-            request.getRequestDispatcher("login").forward(request, response);
-//            response.sendRedirect("login");
-        }
-
-//        response.sendRedirect("index.html");
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -68,7 +58,8 @@ public class loginServ extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        processRequest(request, response);
+        response.sendRedirect("forgot.jsp");
     }
 
     /**
@@ -82,10 +73,30 @@ public class loginServ extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String fUser = request.getParameter("f_username");
+        String fMail = request.getParameter("f_email");
+        String fPass = request.getParameter("f_password");
+        
+        UserDAO ud = new UserDAO();
+        try{
+            if(!ud.getUserByName(fUser).getName().equals(ud.getUserByName(fMail).getName())) {
+                request.setAttribute("returned", "error.match");
+                request.getRequestDispatcher("forgot.jsp").forward(request, response);
+            }
+            
+        }catch(Exception ex){
+                request.setAttribute("returned", "error.user"+fUser+fMail);
+                request.getRequestDispatcher("forgot.jsp").forward(request, response);
+        }
+        
+        User u = ud.getUserByName(fUser);
+        u.setPass(fPass);
+        
+        ud.updateUser(u);
+        
         processRequest(request, response);
     }
 
-    
     /**
      * Returns a short description of the servlet.
      *
@@ -96,17 +107,4 @@ public class loginServ extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    User loginSuccess(String user, String pass){
-        UserDAO ud = new UserDAO();
-        if(!ud.getUsers().isEmpty()){
-            ArrayList<User> ul = ud.getUsers();
-            for(User u:ul){
-                if((u.getName().equals(user) || u.getEmail().equals(user)) && u.getPass().equals(pass)) return u;
-            }
-        }else {
-            User u = new User();
-            u.setId(0);
-        }
-        return null;
-    }
 }
