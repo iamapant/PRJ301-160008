@@ -19,8 +19,8 @@
             User u = new User();
             u =(User)session.getAttribute("user"); 
             boolean check = false;
-            for(User user : ul){
-                if(user.equals(u))check = true;
+            for(User v : ul){
+                if(v.getName().equals(u.getName()) && v.getPass().equals(u.getPass()))check = true;
             }
             if(!check)request.getRequestDispatcher("login.jsp").forward(request,response);
         %>

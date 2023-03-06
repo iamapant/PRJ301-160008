@@ -40,6 +40,8 @@ public class createServ extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
+            Settings f = new Settings();
+//            f.setA_Time1(Time.valueOf(request.getParameter("at")));
             
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
@@ -49,12 +51,14 @@ public class createServ extends HttpServlet {
 //            out.println("<p>"+Time.valueOf(parse)+"</p>");
             out.println("<p>"+request.getParameter("MMHHdd")+"</p>");
             out.println("<p>"+request.getParameter("at")+"</p>");
+//            out.println("<p>"+Time.valueOf(request.getParameter("at"))+"</p>");
+//            out.println("<p>"+f.getA_Time1()+"</p>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet createServ at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
-//            return;
+            return;
         }
     }
 
@@ -86,9 +90,13 @@ public class createServ extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        processRequest(request, response);
-        
+
         UserDAO ud = new UserDAO();
         ArrayList<User> ul = ud.getUsers();
+        if(!(request.getParameter("cinfo") == null || request.getParameter("cinfo").length() == 0) && request.getAttribute("createUser") != null){
+            ud.insertUser((User)request.getAttribute("createUser"));
+            response.sendRedirect("index.html");
+        }
         
         //TODO CHECK NULL
         boolean isName = false;
@@ -99,7 +107,7 @@ public class createServ extends HttpServlet {
         }
         
         String msg = "";
-        if(isName)msg += "user";
+        if(isName)msg += ".user";
         if(isMail)msg += ".mail";
         if(!msg.equals("")){
             request.setAttribute("createMessage", msg);
@@ -118,16 +126,29 @@ public class createServ extends HttpServlet {
         
         u.setDob((Date)request.getAttribute("dob"));
         Settings s = new Settings();
-        int qn = Integer.parseInt(request.getParameter("qn"));
         
-        s.setQ_Notice((Time.valueOf(getQNString(request,response))));
-        s.setA_Time1(Time.valueOf(request.getParameter("at")));
-        s.setA_Time1(Time.valueOf(request.getParameter("at2")));
-        s.setA_Time1(Time.valueOf(request.getParameter("at3")));
+        String qnGet = request.getParameter("qn");
+        String qnMul = request.getParameter("MMHHdd");
+        int qn = 0;
+        if(qnGet != null && qnGet.matches("\\d+")){
+            if(qnMul.equals("minutes"))qn = 1;
+            else if(qnMul.equals("hours"))qn = 60;
+            else if(qnMul.equals("days"))qn = 60*24;
+            qn *= Integer.parseInt(qnGet);
+            qnGet = qn/60+":"+qn%60+":00";
+        }
+        if (!(qnGet == null || qnGet.length() == 0))s.setQ_Notice((Time.valueOf(qnGet)));
+        
+        if(!(request.getParameter("at") == null || request.getParameter("at").length() == 0))s.setA_Time1(Time.valueOf(request.getParameter("at")+":00"));
+        if(!(request.getParameter("at2") == null || request.getParameter("at2").length() == 0))s.setA_Time2(Time.valueOf(request.getParameter("at2")+":00"));
+        if(!(request.getParameter("at3") == null || request.getParameter("a3").length() == 0))s.setA_Time3(Time.valueOf(request.getParameter("at3")+":00"));
         
         u.setSetting(s);
         
-        request.setAttribute("createUser", u);
+        HttpSession session = request.getSession();
+        session.setAttribute("createUser", u);
+        
+        
         request.getRequestDispatcher("confirm-info").forward(request, response);
 //        ud.insertUser(u);
         
@@ -147,7 +168,8 @@ public class createServ extends HttpServlet {
     private String getQNString(HttpServletRequest request, HttpServletResponse response) {
         String getQN = request.getParameter("qn");
         String parse = "";
-        if(request.getParameter("MMHHdd").equals("minutes")){
+        if(getQN != "00:00");
+        else if(request.getParameter("MMHHdd").equals("minutes")){
             int Iqn = Integer.valueOf(getQN);
             int qnH = 0;
             if(Iqn >= 60){

@@ -22,7 +22,7 @@
     </head>
     <body>
         <div class="row">
-            <div class="column side"><button class="backbutton" onclick="location.href ='index.html'">Go Back</button></div>
+            <div class="column side"><button class="backbutton" onclick="location.href ='login.jsp'">Go Back</button></div>
             <div class="column middle">
                 <form class="form" name="loginForm" action="create" method="POST" style="margin-top: 60px;">
                     <div class="fhead">Create user</div>
@@ -67,7 +67,7 @@
                         <br>
                         <%-- AT2 --%>
                         <label for="at2">Alert Time (2):</label><br>
-                        <% if(request.getParameter("at2") == null){%>
+                        <% if(request.getParameter("at2") == null || request.getParameter("at2").length() == 0){%>
                         <input type="text" id="at2" name="at2" style="font-family: inherit;width: 83%;height: 46px;" placeholder="Disabled" disabled/>   
                         <% }else { %> 
                         <input type="time" id="at2" name="at2" value="<%= request.getParameter("at2")%>" style="font-family: inherit;width: 83%;height: 46px;" placeholder="Disabled" />   
@@ -76,8 +76,8 @@
                         <label for="at" class="descr">Default alert time for your long term notices. This is your optional second alert of the day.<i> Order does not matter.</i></label>
                         <br>
                         <%-- AT3 --%>
-                        <label for="at3">Alert Time (3):</label>
-                        <% if(request.getParameter("at3") == null){%>
+                        <label for="at3">Alert Time (3):</label><br>
+                        <% if(request.getParameter("at3") == null || request.getParameter("at3").length() == 0){%>
                         <input type="text" id="at3" name="at3" style="font-family: inherit;width: 83%;height: 46px;" placeholder="Disabled" disabled/>   
                         <% }else { %> 
                         <input type="time" id="at3" name="at3" value="<%= request.getParameter("at3")%>" style="font-family: inherit;width: 83%;height: 46px;" placeholder="Disabled" />   

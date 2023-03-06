@@ -75,7 +75,7 @@ public class loginServ extends HttpServlet {
                 User u = ud.getUserByLogin(username, password);
                 if(u == null)response.sendRedirect("login.jsp");
                 session.setAttribute("user", u);
-//                request.getRequestDispatcher("main").forward(request, response);
+                request.getRequestDispatcher("main").forward(request, response);
                 return;
             }
         }
@@ -100,7 +100,11 @@ public class loginServ extends HttpServlet {
         HttpSession session = request.getSession();
         
         UserDAO ud = new UserDAO();
-        User u = ud.getUserByLogin(user, pass);
+        ArrayList<User> ul = ud.getUsers();
+        User u = null;
+        for(User v : ul){
+            if(v.getName().equals(user) && v.getPass().equals(pass)){u = v; break;}
+        }
         
         if(u != null){
             session.setAttribute("user", u);
@@ -112,10 +116,10 @@ public class loginServ extends HttpServlet {
                 response.addCookie(username);
                 response.addCookie(password);
             }
-            request.getRequestDispatcher("main").forward(request, response);
+            request.getRequestDispatcher("main.jsp").forward(request, response);
         }
         else {
-            request.setAttribute("errorMessage", "Username or password incorrect!"+ud.getUser(1).getName());
+            request.setAttribute("errorMessage", "Username or password incorrect!");
             request.getRequestDispatcher("login.jsp").forward(request, response);
 //            response.sendRedirect("login");
         }

@@ -35,7 +35,7 @@
                     <input type="text" name="username" id="username" placeholder="Username" autofocus required />
                     <label for="pwd">Password:</label>
                     <input type="password" name="password" id="pwd" placeholder="Password" required/>
-                    <div id="status" class="loginStatus"><p class="msg">
+                    <div id="status" class="status"><p class="msg">
                         <%if(request.getAttribute("errorMessage")!=null)
                         {
                             out.println(request.getAttribute("errorMessage"));
@@ -43,10 +43,10 @@
                         %></p>
                     </div>
                     <div>
-                        <input type="checkbox" name="rememberme" id="rm" value="ON" style="display:inline;width: 10%;"/><label for="rm" name="rememberme">Remember me?</label>
+                        <input type="checkbox" name="rememberme" id="rm" value="ON" style="display:inline;margin-left: 3%;margin-right: 3%;width:initial;"/><label for="rm" name="rememberme">Remember me?</label>
                     </div>
                     <input type="submit" value="Login" name="login" />
-                    <div class="bottom-text"><a href="create">Create account?</a> Or <a href="forgot.jsp">forgot password.</a></div>
+                    <div class="bottom-text"><a href="create">Create account?</a> Or <a href="forgot.jsp">Forgot password.</a></div>
                 </form>
             </div>
             <div class="column side"></div>
