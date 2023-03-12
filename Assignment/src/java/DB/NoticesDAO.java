@@ -4,9 +4,11 @@
  */
 package DB;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,6 +22,7 @@ import model.User;
 public class NoticesDAO extends DBContext{
     
     public ArrayList<Notice> getNotices(User u){
+        updateRepeatableNotices();
         ArrayList<Notice> nl = new ArrayList<>();
         try{
             String sql = "select NoticeID,id,Title,Descr,Alert_Time,rep from Notices where id = ?";
@@ -79,6 +82,64 @@ public class NoticesDAO extends DBContext{
         catch(SQLException ex){
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE,null,ex);     
         }
+    }
+    
+    private void updateRepeatableNotices(){
+        ArrayList<Notice> nl = new ArrayList<>();
+        try{
+            String sql = "select NoticeID,id,Title,Descr,Alert_Time,rep from Notices where rep not like 0";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                Notice n = new Notice();
+                n.setNid(rs.getInt("NoticeID")); 
+                n.setId(rs.getInt("ID")); 
+                n.setTitle(rs.getString("Title")); 
+                n.setDescr(rs.getString("Descr")); 
+                n.setA_Time(rs.getTimestamp("Alert_Time")); 
+                n.setRepeatable(rs.getInt("rep"));
+                nl.add(n);
+            }
+            long day = 1000*60*60*24;
+            long[] rep = {0,day,day*7,day*7*2,day*7*4,day*7*4*12};
+            for(Notice n : nl){
+                long t = n.getA_Time().getTime();
+                while(n.getA_Time().before(new Date(System.currentTimeMillis()))){
+                    t += rep[n.getRepeatable()];
+                    n.setA_Time(new Timestamp(t));
+                }
+                updateNotice(n);
+            }
+        }
+        catch(SQLException ex){
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE,null,ex);     
+        }      
+    }
+    
+    public ArrayList<Notice> getUpcomingNotices(User u){
+        ArrayList<Notice> nl = new ArrayList<>();
+        try{
+            String sql = "select NoticeID,id,Title,Descr,Alert_Time,rep from Notices where id = ? and Alert_Time >= ? order by Alert_Time";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, u.getId());
+            ps.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                Notice n = new Notice();
+                n.setNid(rs.getInt("NoticeID")); 
+                n.setId(rs.getInt("ID")); 
+                n.setTitle(rs.getString("Title")); 
+                n.setDescr(rs.getString("Descr")); 
+                n.setA_Time(rs.getTimestamp("Alert_Time")); 
+                n.setRepeatable(rs.getInt("rep"));
+                nl.add(n);
+            }
+            return nl;
+        }
+        catch(SQLException ex){
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE,null,ex);     
+        }
+        return null;
     }
     
     public void deleteNotice(Notice n){

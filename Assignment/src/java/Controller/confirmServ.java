@@ -105,14 +105,13 @@ public class confirmServ extends HttpServlet {
             out.println("<head>");
             out.println("<title>Add</title>");            
             out.println("</head>");
-            out.println("<body>");
+            out.println("<body onload=\"setTimeout(function(){document.location = 'login.jsp'}, 3000)\">");
             if(b)out.println("<p>User added.</p>");
             else out.println("<p>User not added.</p>");
             out.println("</body>");
             if(b)out.println("<meta http-equiv=\"refresh\" content=\"3;url=login\">");
             else out.println("<meta http-equiv=\"refresh\" content=\"3;url=create\">");
             out.println("</html>");
-            
             HttpSession session = request.getSession();
             session.removeAttribute("createUser");
             

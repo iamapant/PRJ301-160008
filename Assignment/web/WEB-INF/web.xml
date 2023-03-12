@@ -28,6 +28,10 @@
         <servlet-name>confirmed</servlet-name>
         <servlet-class>Controller.confirmServ</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>addNoti</servlet-name>
+        <servlet-class>Controller.addNotiServ</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>loginCheck</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>confirmed</servlet-name>
         <url-pattern>/confirmed</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addNoti</servlet-name>
+        <url-pattern>/addNoti</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

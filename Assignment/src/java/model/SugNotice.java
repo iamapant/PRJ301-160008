@@ -1,21 +1,21 @@
 package model;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class SugNotice {
     int SID;
     String Title;
     String Descr;
-    Timestamp Alert_Time;
+    Date Alert_Date;
 
     public SugNotice() {
     }
 
-    public SugNotice(int SID, String Title, String Descr, Timestamp Alert_Time) {
+    public SugNotice(int SID, String Title, String Descr, Date Alert_Date) {
         this.SID = SID;
         this.Title = Title;
         this.Descr = Descr;
-        this.Alert_Time = Alert_Time;
+        this.Alert_Date = Alert_Date;
     }
 
     public int getSID() {
@@ -42,12 +42,12 @@ public class SugNotice {
         this.Descr = Descr;
     }
 
-    public Timestamp getAlert_Time() {
-        return Alert_Time;
+    public Date getAlert_Date() {
+        return Alert_Date;
     }
 
-    public void setAlert_Time(Timestamp Alert_Time) {
-        this.Alert_Time = Alert_Time;
+    public void setAlert_Date(Date Alert_Date) {
+        this.Alert_Date = Alert_Date;
     }
     
 }

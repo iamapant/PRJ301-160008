@@ -75,7 +75,8 @@ public class loginServ extends HttpServlet {
                 User u = ud.getUserByLogin(username, password);
                 if(u == null)response.sendRedirect("login.jsp");
                 session.setAttribute("user", u);
-                request.getRequestDispatcher("main").forward(request, response);
+//                request.getRequestDispatcher("main").forward(request, response);
+                response.sendRedirect("main");
                 return;
             }
         }
@@ -116,7 +117,8 @@ public class loginServ extends HttpServlet {
                 response.addCookie(username);
                 response.addCookie(password);
             }
-            request.getRequestDispatcher("main.jsp").forward(request, response);
+//            request.getRequestDispatcher("main.jsp").forward(request, response);
+            response.sendRedirect("main");
         }
         else {
             request.setAttribute("errorMessage", "Username or password incorrect!");

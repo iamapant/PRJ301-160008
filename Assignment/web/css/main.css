@@ -12,7 +12,7 @@ html, body {
     /* float: left; */
     position: fixed;
     width: 100%;
-    z-index: 1;
+    z-index: 2;
     margin:auto;
     background: yellow;
 }
@@ -43,13 +43,29 @@ html, body {
     
     opacity: 0.9;
 }
+.grid-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-right: 30px;
+}
+.timePart,.infoPart{
+    flex: 1;
+    margin-right: 20px;
+}
+.grid-child{
+    background: lightgray;
+    border: 2px solid white;
+    border-bottom-right-radius: 50%;
+    flex: 1;
+    margin-right: 20px;
+}
 .icon{
    float: right;
    /*display:inline;*/
    border-radius: 50%;
    border: solid 6px transparent;
-   width: 50px;
-   height: 50px;
+   width: 40px;
+   height: 40px;
    margin:0px;
    /*margin-top: 6px;*/
    margin-right: 10px;
@@ -62,15 +78,14 @@ html, body {
 }
 .right{
     background: red;
-    position: sticky;
     width: 20%;
     height: 100%;
-    z-index: -1;
+    z-index: 1;
     position: fixed;
     margin-left: 80%;
     float: right;
     padding-top: 50px;
-    /* overflow: hidden; */
+     overflow: hidden; 
 }
 .upcoming{
     background: indigo;
@@ -82,6 +97,8 @@ html, body {
 }
 .calendar{
     padding: 60px;
+    padding-top: 40px;
+    padding-right: 20px;
 }
 .suggestion{
     padding: 30px;
