@@ -25,14 +25,6 @@
         <servlet-name>updateSetting</servlet-name>
     </filter-mapping>
     <filter-mapping>
-        <filter-name>LoginCatcherFilter</filter-name>
-        <url-pattern>/login</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>Login_FindAccountFilter</filter-name>
-        <servlet-name>loginServ</servlet-name>
-    </filter-mapping>
-    <filter-mapping>
         <filter-name>MainFilter</filter-name>
         <servlet-name>main</servlet-name>
         <servlet-name>addNoti</servlet-name>

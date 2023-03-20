@@ -100,26 +100,11 @@ public class loginServ extends HttpServlet {
             throws ServletException, IOException {
         String user = request.getParameter("username");
         String pass = request.getParameter("password");
-        User u = new User();
-        
         HttpSession session = request.getSession();
-        if(request.getParameter("username") != null && request.getParameter("password") != null){
-            u.setName(user);
-            u.setPass(pass);
-            session.setAttribute("user", u);
-            if(request.getParameter("rememberme") != null) {
-                Cookie username = new Cookie("username", user);
-                Cookie password = new Cookie("password", pass);
-                username.setMaxAge(3600*24*7*365);
-                password.setMaxAge(3600*24*7*365);
-                response.addCookie(username);
-                response.addCookie(password);
-            }
-            response.sendRedirect("main");
-        }
-        request.getRequestDispatcher("login").forward(request, response);
+        
         UserDAO ud = new UserDAO();
         ArrayList<User> ul = ud.getUsers();
+        User u = null;
         for(User v : ul){
             if(v.getName().equals(user) && v.getPass().equals(pass)){u = v; break;}
         }

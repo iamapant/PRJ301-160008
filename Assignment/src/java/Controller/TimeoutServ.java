@@ -51,7 +51,7 @@ public class TimeoutServ extends HttpServlet {
                 response.addCookie(c);
             }
             session.invalidate();
-//            response.sendRedirect("./");
+            response.sendRedirect("./");
         }
     }
 
