@@ -1,7 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <filter>
+        <filter-name>MainFilter</filter-name>
+        <filter-class>Filter.MainFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>PreFilter</filter-name>
+        <filter-class>Filter.PreFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>Login_FindAccountFilter</filter-name>
+        <filter-class>Filter.LoginFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>LoginCatcherFilter</filter-name>
+        <filter-class>Filter.LoginCatcherFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>PreFilter</filter-name>
+        <servlet-name>main</servlet-name>
+        <servlet-name>delete</servlet-name>
+        <servlet-name>setting</servlet-name>
+        <servlet-name>TimeoutServ</servlet-name>
+        <servlet-name>updateSetting</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>LoginCatcherFilter</filter-name>
+        <url-pattern>/login</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Login_FindAccountFilter</filter-name>
+        <servlet-name>loginServ</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>MainFilter</filter-name>
+        <servlet-name>main</servlet-name>
+        <servlet-name>addNoti</servlet-name>
+        <servlet-name>delete</servlet-name>
+        <servlet-name>setting</servlet-name>
+        <servlet-name>updateSetting</servlet-name>
+    </filter-mapping>
     <servlet>
-        <servlet-name>loginCheck</servlet-name>
+        <servlet-name>loginServ</servlet-name>
         <servlet-class>Controller.loginServ</servlet-class>
     </servlet>
     <servlet>
@@ -32,8 +72,24 @@
         <servlet-name>addNoti</servlet-name>
         <servlet-class>Controller.addNotiServ</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>delete</servlet-name>
+        <servlet-class>Controller.DeleteServ</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>setting</servlet-name>
+        <jsp-file>/setting.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>TimeoutServ</servlet-name>
+        <servlet-class>Controller.TimeoutServ</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>updateSetting</servlet-name>
+        <servlet-class>Controller.updateSettingServ</servlet-class>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>loginCheck</servlet-name>
+        <servlet-name>loginServ</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
@@ -63,6 +119,22 @@
     <servlet-mapping>
         <servlet-name>addNoti</servlet-name>
         <url-pattern>/addNoti</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>delete</servlet-name>
+        <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TimeoutServ</servlet-name>
+        <url-pattern>/Timeout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateSetting</servlet-name>
+        <url-pattern>/updateSetting</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>setting</servlet-name>
+        <url-pattern>/setting</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

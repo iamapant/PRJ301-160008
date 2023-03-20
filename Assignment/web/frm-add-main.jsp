@@ -13,7 +13,7 @@
     </head>
     <body>
         <form name="addNoti" action="addNoti" method="POST">
-            <div class="header" style="padding-bottom: 10px;">Create new notification</div>
+            <h2 class="header">Create new notification</h2>
             <div class="grid-container">
                 <div class="timePart">
                     <c:choose>

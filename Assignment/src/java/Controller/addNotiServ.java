@@ -36,7 +36,7 @@ public class addNotiServ extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response, long n)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
@@ -55,7 +55,7 @@ public class addNotiServ extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet addNotiServ at " + new Date(getDateWithoutTime().getTime()) + "</h1>");
-            out.println("<h1>Servlet addNotiServ at " + u.getName() + "</h1>");
+            out.println("<h1>Servlet addNotiServ at " + new Timestamp(n) + "</h1>");
             out.println("<h1>Servlet addNotiServ at " + "aaa" + "</h1>");
             out.println("</body>");
             out.println("</html>");
@@ -74,7 +74,7 @@ public class addNotiServ extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        processRequest(request, response);
     }
 
     /**
@@ -96,7 +96,7 @@ public class addNotiServ extends HttpServlet {
         User u = (User)session.getAttribute("user");
         int id = u.getId();
         String title = request.getParameter("title");
-        String descr = request.getParameter("desrc");
+        String descr = request.getParameter("descr");
         String repS = request.getParameter("repeat");
         String dateS = request.getParameter("date");
         Date date;
@@ -133,8 +133,15 @@ public class addNotiServ extends HttpServlet {
                 }
             }
             else {
-                String[] timePart = u.getSetting().getQ_Notice().toString().split(":");
-                timeLong = Integer.parseInt(timePart[0])*1000*60*60 + Integer.parseInt(timePart[1])*1000*60 + System.currentTimeMillis();
+                long timePart = u.getSetting().getQ_Notice()*1000*60;
+                if(u.getSetting().getQN_period().equals("hours")){
+                    timePart *= 60;
+                }
+                if(u.getSetting().getQN_period().equals("days")){
+                    timePart *= 1440;
+                }
+                timeLong = System.currentTimeMillis() + timePart;
+//                processRequest(request, response, timeLong);
             }
         }
         if(new Date(timeLong).after(new Date(System.currentTimeMillis()))){
@@ -144,13 +151,13 @@ public class addNotiServ extends HttpServlet {
             if(descr != null)n.setDescr(descr);
             n.setRepeatable(rep);
             n.setA_Time(new Timestamp(timeLong));
+            
             NoticesDAO nd = new NoticesDAO();
             nd.insertNotice(n);
             
             if(timeLong2 != 0){n.setA_Time(new Timestamp(timeLong2));nd.insertNotice(n);}
             if(timeLong3 != 0){n.setA_Time(new Timestamp(timeLong3));nd.insertNotice(n);}
         }
-        
         response.sendRedirect("main");
         return;
     }

@@ -52,7 +52,7 @@
                         <p id="dob"><% if(u.getDob() != null){out.print(u.getDob());}else{out.print("(Date of birth is not set.)");} %></p>
                     </div><div>
                         <label for="qn">Quick_Notices timer:</label>
-                        <p id="qn"><% if(u.getSetting().getQ_Notice() != null ){out.print(u.getSetting().getQ_Notice());}else{out.print("(Default: 5 minutes)");} %></p>
+                        <p id="qn"><%out.print(u.getSetting().getQ_Notice() + " " + u.getSetting().getQN_period()); %></p>
                     </div><div>
                         <label for="at">Alert 1 time:</label>
                         <p id="at"><% if(u.getSetting().getA_Time1() != null){out.print(u.getSetting().getA_Time1());}else{out.print("(Default: 7AM)");} %></p>
@@ -63,7 +63,8 @@
                         <label for="at3">Alert 3 time:</label>
                         <p id="at3"><% if(u.getSetting().getA_Time3() != null){out.print(u.getSetting().getA_Time3());}else{out.print("(Not set)");} %></p>
                     </div>
-                    <input type="submit" style="width: 48%; float: right;" value="Confirm"/>
+                    <button type="standard" form="a" style="width: 49%;" onclick="window.history.go(-1);">Back</button>
+                    <button type="submit" style="width: 49%; float: right;" >Confirm</button>
                 </form>
             </div>
             <div class="column side"></div>

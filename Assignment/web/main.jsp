@@ -18,7 +18,6 @@
         <link rel="stylesheet" href="./css/main.css">
         <% 
             //TODO CHECK NULL
-            if(session.getAttribute("user") == null){response.sendRedirect("login");return;}
             
             UserDAO ud = new UserDAO();
             NoticesDAO nd = new NoticesDAO();
@@ -30,75 +29,25 @@
             
             User u = new User();
             u =(User)session.getAttribute("user"); 
-            boolean check = false;
-            for(User v : ul){
-                if(v.getName().equals(u.getName()) && v.getPass().equals(u.getPass()))check = true;
-            }
-            if(!check){response.sendRedirect("login");return;}
-            ArrayList<Notice> nl = nd.getUpcomingNotices(u);
+            
+            nd.updateRepeatableNotices(u.getId());
         %>
     </head>
     <body>
         <div class="ribbon">
             <div class="setting">
                 <input type="submit" value="☰" class="settingBtn" id="settingBtn" onmouseover="this.style.backgroundColor = 'white'" onmouseout="this.style.backgroundColor = 'transparent'" onclick="showRight()"/>
-                <img src="pics/icon.jpg" class="icon" onclick="location.href ='setting.jsp'" onmouseover="this.style.border = '6px solid white'" onmouseout="this.style.border = '6px solid transparent'">
+                <img src="pics/icon.jpg" class="icon" onclick="location.href ='setting'" onmouseover="this.style.border = '6px solid white'" onmouseout="this.style.border = '6px solid transparent'">
             </div>
         </div>
         <div class="left" id="left">
             <div class="upcoming">
                 <h2>Upcoming</h2>
-                <c:set var="num_Notice" scope="page" value="<%=nl.size()%>"/>
-                <c:choose>
-                    <c:when test="${num_Notice == 1}">
-                        <div class="grid-container">
-                            <div class="grid-child">
-                                <h2><%=nl.get(0).getTitle()%></h2>
-                                <% if(nl.get(0).getDescr() != null ) nl.get(0).getDescr();%>
-                                <%=nl.get(0).getA_Time()%>
-                            </div>
-                        </div>
-                    </c:when>
-                    <c:when test="${num_Notice == 2}">
-                        <div class="grid-container">
-                            <div class="grid-child">
-                                <%=nl.get(0).getTitle()%>
-                                <% if(nl.get(0).getDescr() != null ) nl.get(0).getDescr();%>
-                                <%=nl.get(0).getA_Time()%>
-                            </div>
-                            <div class="grid-child">
-                                <%=nl.get(1).getTitle()%>
-                                <% if(nl.get(1).getDescr() != null ) nl.get(1).getDescr();%>
-                                <%=nl.get(1).getA_Time()%>
-                            </div>
-                        </div>
-                    </c:when>
-                    <c:when test="${num_Notice >= 3}">
-                        <div class="grid-container">
-                            <div class="grid-child">
-                                <%=nl.get(0).getTitle()%>
-                                <% if(nl.get(0).getDescr() != null ) nl.get(0).getDescr();%>
-                                <%=nl.get(0).getA_Time()%>
-                            </div>
-                            <div class="grid-child">
-                                <%=nl.get(1).getTitle()%>
-                                <% if(nl.get(1).getDescr() != null ) nl.get(1).getDescr();%>
-                                <%=nl.get(1).getA_Time()%>
-                            </div>
-                            <div class="grid-child">
-                                <%=nl.get(2).getTitle()%>
-                                <% if(nl.get(2).getDescr() != null ) nl.get(2).getDescr();%>
-                                <%=nl.get(2).getA_Time()%>
-                            </div>
-                        </div>
-                    </c:when>
-                    <c:otherwise>
-                        <div class="no-notices">
-                        You have no upcoming notices!
-                        </div>
-                    </c:otherwise>
-                </c:choose>
+                <jsp:include page="frm-upcoming.jsp" >
+                    <jsp:param name="id" value="<%=u.getId()%>"/>
+                </jsp:include>
             </div>
+            <hr class="divider"/>
             <div class="calendar">
                 <jsp:include page="frm-add-main.jsp"/>
                 <h2>Calendar</h2>
@@ -107,9 +56,16 @@
         </div>
         <div class="right" id="right">
             <div class="suggestion">
-                <h1 id="suggs" onclick="switchList()" style="margin-bottom: 5px">Suggestion</h1>
-                <h4 id="alt-suggs" onclick="switchList()" style="color: #cccccc;margin-top: 5px">User's notifications</h4>
-                <jsp:include page="frm-sugg-add.jsp"/>
+                <button class="suggs" id="suggs" onclick="switchList()" >Suggestion</button>
+                <button class="alt-suggs" id="alt-suggs" onclick="switchList()" >User's notifications</button>
+                <div id="sugg-content" class="sugg-content">
+                    <jsp:include page="frm-sugg-add.jsp"/>
+                </div>
+                <div id="notice-list-content" class="notice-list-content" hidden>
+                    <jsp:include page="frm-notice-list.jsp">
+                        <jsp:param name="id" value="<%=u.getId()%>"/>
+                    </jsp:include>
+                </div>
             </div>
         </div>
         <script>
@@ -118,10 +74,14 @@
                 if(document.getElementById("suggs").innerHTML === "Suggestion"){
                     document.getElementById("suggs").innerHTML = "User's notifications";
                     document.getElementById("alt-suggs").innerHTML = "Suggestion";
+                    document.getElementById("sugg-content").hidden = true;
+                    document.getElementById("notice-list-content").hidden = false;
                 }
                 else {
                     document.getElementById("suggs").innerHTML = "Suggestion";
                     document.getElementById("alt-suggs").innerHTML = "User's notifications";
+                    document.getElementById("sugg-content").hidden = false;
+                    document.getElementById("notice-list-content").hidden = true;
                 }
             }
             function showDescr(){

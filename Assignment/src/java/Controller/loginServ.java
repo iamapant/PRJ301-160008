@@ -52,37 +52,39 @@ public class loginServ extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //check session for alr login
-        HttpSession session = request.getSession();
-        UserDAO ud = new UserDAO();
-        if(session.getAttribute("user") != null){
-            User u = (User) session.getAttribute("user");
-            if(ud.getUserByLogin(u.getName(), u.getPass()) != null){
-                session.setAttribute("user", u);
-                request.getRequestDispatcher("main").forward(request, response);
-                return;
-            }
-        }
-        //check cookie
-        Cookie[] cookies = request.getCookies();
-        if(cookies != null){
-            String username = null;
-            String password = null;
-            for(Cookie c : cookies){
-                if(c.getName().equals("username"))username = c.getValue();
-                if(c.getName().equals("password"))password = c.getValue();
-            }
-            if(username != null && password != null){
-                User u = ud.getUserByLogin(username, password);
-                if(u == null)response.sendRedirect("login.jsp");
-                session.setAttribute("user", u);
+//        HttpSession session = request.getSession();
+//        UserDAO ud = new UserDAO();
+//        if(session.getAttribute("user") != null){
+//            User u = (User) session.getAttribute("user");
+//            if(ud.getUserByLogin(u.getName(), u.getPass()) != null){
+//                session.setAttribute("user", u);
 //                request.getRequestDispatcher("main").forward(request, response);
-                response.sendRedirect("main");
-                return;
-            }
-        }
-        //goto login page if both null
-//        else 
-            response.sendRedirect("login.jsp");
+//                return;
+//            }
+//        }
+//        //check cookie
+//        Cookie[] cookies = request.getCookies();
+//        if(cookies != null){
+//            String username = null;
+//            String password = null;
+//            for(Cookie c : cookies){
+//                if(c.getName().equals("username"))username = c.getValue();
+//                if(c.getName().equals("password"))password = c.getValue();
+//            }
+//            if(username != null && password != null){
+//                User u = ud.getUserByLogin(username, password);
+//                if(u == null)response.sendRedirect("login.jsp");
+//                session.setAttribute("user", u);
+//                session.setMaxInactiveInterval(60*60*2);
+////                request.getRequestDispatcher("main").forward(request, response);
+//                response.sendRedirect("main");
+//                return;
+//            }
+//        }
+//        //goto login page if both null
+////        else 
+////            response.sendRedirect("login.jsp");
+        request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
     /**
@@ -98,11 +100,26 @@ public class loginServ extends HttpServlet {
             throws ServletException, IOException {
         String user = request.getParameter("username");
         String pass = request.getParameter("password");
-        HttpSession session = request.getSession();
+        User u = new User();
         
+        HttpSession session = request.getSession();
+        if(request.getParameter("username") != null && request.getParameter("password") != null){
+            u.setName(user);
+            u.setPass(pass);
+            session.setAttribute("user", u);
+            if(request.getParameter("rememberme") != null) {
+                Cookie username = new Cookie("username", user);
+                Cookie password = new Cookie("password", pass);
+                username.setMaxAge(3600*24*7*365);
+                password.setMaxAge(3600*24*7*365);
+                response.addCookie(username);
+                response.addCookie(password);
+            }
+            response.sendRedirect("main");
+        }
+        request.getRequestDispatcher("login").forward(request, response);
         UserDAO ud = new UserDAO();
         ArrayList<User> ul = ud.getUsers();
-        User u = null;
         for(User v : ul){
             if(v.getName().equals(user) && v.getPass().equals(pass)){u = v; break;}
         }

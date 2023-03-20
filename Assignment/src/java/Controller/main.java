@@ -28,13 +28,13 @@ public class main {
 //        System.out.println(Time.valueOf("05:00:00"));
         
         User u = new User();
-        u.setId(1);
+//        u.setId(1);
         UserDAO ud  = new UserDAO();
-        if(ud.getUserByName("e").getName() == null){
-            System.out.println("aaaaa");
-        }
-        else 
-            System.out.println(ud.getUserByName("e").getName());
+//        if(ud.getUserByName("e").getName() == null){
+//            System.out.println("aaaaa");
+//        }
+//        else 
+//            System.out.println(ud.getUserByName("e").getName());
 //        System.out.println(ud.getUserByLogin("b", "a").getName());
         
 //        u.setId(2);
@@ -42,6 +42,10 @@ public class main {
 //        u.setName("a@a.a");
 //        u.setPass("a");
 //        
+        u = ud.getUser(1);
+        u.getSetting().setQ_Notice(3);
+        ud.updateUser(u);
+
 //        ud.insertUser(u);
 //        List<User> list = ud.getUsers();
 //        User n = new User();
@@ -62,6 +66,7 @@ public class main {
 //        System.out.println(s.getQ_Notice());
 
 //        NoticesDAO nd = new NoticesDAO();
+//        nd.updateRepeatableNotices(1);
 //        Notice n = new Notice();
 //        n.setNid(3);
 //        n.setId(1);

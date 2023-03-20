@@ -49,11 +49,11 @@
                     <input type="button" value="Change Settings" id="settingB" onclick="showSettings()" style="margin-bottom: 20px;"/>
                     <div id="settings" style="display: none;">
                         <label for="qn">Quick Notice:</label>
-                        <input type="number" id="qn" name="qn" min="1" onfocusout="unFoReset()" onclick="value5()" <% if(request.getParameter("qn") != null){%> value="<%= request.getParameter("qn")%>"<%}%> placeholder="Default: 5(minutes)"/>    
+                        <input type="number" id="qn" name="qn" min="1" <% if(request.getParameter("qn") != null){%> value="<%= request.getParameter("qn")%>"<%}%> placeholder="Default: 5(minutes)"/>    
                         <div class="row qn">
-                            <div class="column qn"><input type="radio" name="MMHHdd" value="minutes" id="minutes" <% if(request.getParameter("MMHHdd") == null ||request.getParameter("MMHHdd").equals("minutes")){%>checked="checked" <%}%> onclick="unDef()"/><br><label for="minutes" style="margin: 7px">Minutes</label></div>
-                            <div class="column qn"><input type="radio" name="MMHHdd" value="hours" id="hours" <% if(request.getParameter("MMHHdd") != null &&request.getParameter("MMHHdd").equals("hours")){%>checked="checked" <%}%> onclick="unDef()"/><br> <label for="hours" style="margin: 7px">Hours</label></div>
-                            <div class="column qn r"><input type="radio" name="MMHHdd" value="days" id="days" <% if(request.getParameter("MMHHdd") != null &&request.getParameter("MMHHdd").equals("days")){%>checked="checked" <%}%> onclick="unDef()"/> <br> <label for="days" style="margin: 7px">Days</label></div>
+                            <div class="column qn"><input type="radio" name="MMHHdd" value="minutes" id="minutes" <% if(request.getParameter("MMHHdd") == null ||request.getParameter("MMHHdd").equals("minutes")){%>checked="checked" <%}%>/><br><label for="minutes" style="margin: 7px">Minutes</label></div>
+                            <div class="column qn"><input type="radio" name="MMHHdd" value="hours" id="hours" <% if(request.getParameter("MMHHdd") != null &&request.getParameter("MMHHdd").equals("hours")){%>checked="checked" <%}%>/><br> <label for="hours" style="margin: 7px">Hours</label></div>
+                            <div class="column qn r"><input type="radio" name="MMHHdd" value="days" id="days" <% if(request.getParameter("MMHHdd") != null &&request.getParameter("MMHHdd").equals("days")){%>checked="checked" <%}%>/> <br> <label for="days" style="margin: 7px">Days</label></div>
                         </div>
                         <label for="qn" class="descr">Default timer for your quick notices.</label>
                         <br>
@@ -91,24 +91,6 @@
             <div class="column side"></div>
         </div>        
         <script>
-            function unFoReset(){
-                if(document.getElementById("qn").value === null || document.getElementById("qn").value === ''){
-                    if(document.getElementById("hours").checked === true){
-                        document.getElementById("hours").checked = false;
-                    document.getElementById("minutes").checked = true;
-                    }
-                    else if(document.getElementById("days").checked === true){
-                        document.getElementById("days").checked = false;
-                    document.getElementById("minutes").checked = true;
-                    }
-                    else document.getElementById("minutes").checked = true;
-                }
-            }
-            function value5(){
-                if(document.getElementById("qn").value === null || document.getElementById("qn").value === ''){
-                    document.getElementById("qn").value = "5";
-                }
-            }
             function Fo(){
                 if(document.getElementById("at").value === null || document.getElementById("at").value === ''){
                     document.getElementById("at").type = "time";
@@ -121,9 +103,6 @@
                     document.getElementById("at").value = null;
                     document.getElementById("at").placeholder = "Default: 7am";
                 }
-            }
-            function unDef(){
-                document.getElementById("qn").value = "5";
             }
             function enAT(n){
                 if(document.getElementById("at"+n).disabled === true){

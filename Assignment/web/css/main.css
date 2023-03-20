@@ -14,7 +14,7 @@ html, body {
     width: 100%;
     z-index: 2;
     margin:auto;
-    background: yellow;
+    background: #125a9a;
 }
 .setting{
     border: none;
@@ -72,12 +72,12 @@ html, body {
 }
 .left{
     float: left;
-    background: blue;
+    background: white;
     width: 80%;
     height: 200%;
 }
 .right{
-    background: red;
+    background: #327aba;
     width: 20%;
     height: 100%;
     z-index: 1;
@@ -86,9 +86,12 @@ html, body {
     float: right;
     padding-top: 50px;
      overflow: hidden; 
+    /*height: 85%;*/
+    /*position: relative;*/
+    overflow-y: scroll;
 }
 .upcoming{
-    background: indigo;
+    /*background: indigo;*/
     z-index: 1;
     padding-top: 70px;
     padding-left: 60px;
@@ -97,9 +100,72 @@ html, body {
 }
 .calendar{
     padding: 60px;
-    padding-top: 40px;
+    padding-top: 20px;
     padding-right: 20px;
 }
 .suggestion{
     padding: 30px;
+}
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+.notice-list-content{
+    margin-bottom: 5vh;
+}
+.list-child{
+    border: 2px solid white;
+    background: teal;
+    margin: 10px;
+    border-radius: 10px;
+}
+.inner{
+    margin-left: 5px;
+}
+.header{
+    padding-bottom: 20px;
+    margin: 0px;
+}
+b{
+    color:aquamarine
+}
+.no-notices{
+    font-size: 25px;
+    text-align: center;
+    margin-top: 40px;
+}
+.divider{
+    width: 90%;
+    margin-top: 40px;
+    margin-left:50px;
+    margin-right: 50px;
+    border-bottom: 2px solid grey;
+    opacity: 60%;
+}
+.suggs{
+    margin-bottom: 5px;
+  background-color: inherit;
+  display: block;
+  /*float: left;*/
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding-top: 14px ;
+  transition: 0.3s;
+  font-size: 2em;
+  font-weight: bolder;
+}
+.alt-suggs{
+    color: #cccccc;
+    margin-top: 5px;
+  background-color: inherit;
+  display: block;
+  /*float: left;*/
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 6px ;
+  padding-left: 15px;
+  transition: 0.3s;
+  font-size: 1.5em;
 }

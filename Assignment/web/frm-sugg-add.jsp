@@ -35,7 +35,7 @@
             </div>
         </c:when>
         <c:otherwise>
-            <div class="no-suggs">You have no suggested notifications!</div>
+            <div class="no-notices">You have no suggested notifications!</div>
         </c:otherwise>
     </c:choose>
 </body>

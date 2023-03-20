@@ -3,7 +3,8 @@ import java.sql.*;
 
 public class Settings {
     int id;
-    Time Q_Notice;
+    int Q_Notice;
+    String QN_period;
     Time A_Time1;
     Time A_Time2;
     Time A_Time3;
@@ -11,9 +12,26 @@ public class Settings {
     public Settings() {
     }
 
-    public Settings(int id, Time Q_Notice, Time A_Time1, Time A_Time2, Time A_Time3) {
+    public int getQ_Notice() {
+        return Q_Notice;
+    }
+
+    public void setQ_Notice(int Q_Notice) {
+        this.Q_Notice = Q_Notice;
+    }
+
+    public String getQN_period() {
+        return QN_period;
+    }
+
+    public void setQN_period(String QN_period) {
+        this.QN_period = QN_period;
+    }
+
+    public Settings(int id, int Q_Notice, String QN_period, Time A_Time1, Time A_Time2, Time A_Time3) {
         this.id = id;
         this.Q_Notice = Q_Notice;
+        this.QN_period = QN_period;
         this.A_Time1 = A_Time1;
         this.A_Time2 = A_Time2;
         this.A_Time3 = A_Time3;
@@ -25,15 +43,6 @@ public class Settings {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-
-    public Time getQ_Notice() {
-        return Q_Notice;
-    }
-
-    public void setQ_Notice(Time Q_Notice) {
-        this.Q_Notice = Q_Notice;
     }
 
     public Time getA_Time1() {

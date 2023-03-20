@@ -80,9 +80,8 @@ public class confirmServ extends HttpServlet {
             UserDAO ud = new UserDAO();
             HttpSession session = request.getSession();
             User u = (User)session.getAttribute("createUser");
-            
-                ud.insertUser(u);
-            
+            if(u == null){display(false,request, response);return;}
+            ud.insertUser(u);
             display(true,request,response);
     }
 

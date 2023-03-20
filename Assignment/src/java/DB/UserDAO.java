@@ -116,6 +116,8 @@ public class UserDAO extends SettingsDAO {
             ps.setDate(4, u.getDob());
             ps.setInt(5, u.getId());
             ps.executeUpdate();
+            SettingsDAO sd = new SettingsDAO();
+            sd.updateSettings(u);
         }
         catch(SQLException ex){
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE,null,ex);

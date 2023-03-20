@@ -124,24 +124,18 @@ public class createServ extends HttpServlet {
 //        User v = ud.getUserByLogin(u.getName(), u.getPass());
 
         
-        u.setDob((Date)request.getAttribute("dob"));
+        if(request.getAttribute("dob") != null)u.setDob((Date)request.getAttribute("dob"));
         Settings s = new Settings();
         
-        String qnGet = request.getParameter("qn");
-        String qnMul = request.getParameter("MMHHdd");
-        int qn = 0;
-        if(qnGet != null && qnGet.matches("\\d+")){
-            if(qnMul.equals("minutes"))qn = 1;
-            else if(qnMul.equals("hours"))qn = 60;
-            else if(qnMul.equals("days"))qn = 60*24;
-            qn *= Integer.parseInt(qnGet);
-            qnGet = qn/60+":"+qn%60+":00";
-        }
-        if (!(qnGet == null || qnGet.length() == 0))s.setQ_Notice((Time.valueOf(qnGet)));
+        String qnMul;
+        int qn;
+        if (request.getParameter("qn") != null && request.getParameter("qn").length() > 0)qn = Integer.parseInt(request.getParameter("qn")); else qn = 5;
+        if (request.getParameter("MMHHdd") != null && request.getParameter("MMHHdd").length() != 0)qnMul = request.getParameter("MMHHdd");else qnMul = "minutes";
         
-        if(!(request.getParameter("at") == null || request.getParameter("at").length() == 0))s.setA_Time1(Time.valueOf(request.getParameter("at")+":00"));
-        if(!(request.getParameter("at2") == null || request.getParameter("at2").length() == 0))s.setA_Time2(Time.valueOf(request.getParameter("at2")+":00"));
-        if(!(request.getParameter("at3") == null || request.getParameter("a3").length() == 0))s.setA_Time3(Time.valueOf(request.getParameter("at3")+":00"));
+        s.setQ_Notice(qn);s.setQN_period(qnMul);
+        if(!(request.getParameter("at") == null || request.getParameter("at").length() == 0))if(request.getParameter("at").split(":").length > 2)s.setA_Time1(Time.valueOf(request.getParameter("at")));else s.setA_Time1(Time.valueOf(request.getParameter("at")+":00"));
+        if(!(request.getParameter("at2") == null || request.getParameter("at2").length() == 0))if(request.getParameter("at2").split(":").length > 2)s.setA_Time1(Time.valueOf(request.getParameter("at2")));else s.setA_Time1(Time.valueOf(request.getParameter("at2")+":00"));
+        if(!(request.getParameter("at3") == null || request.getParameter("a3").length() == 0))if(request.getParameter("at3").split(":").length > 2)s.setA_Time1(Time.valueOf(request.getParameter("at3")));else s.setA_Time1(Time.valueOf(request.getParameter("at3")+":00"));
         
         u.setSetting(s);
         
