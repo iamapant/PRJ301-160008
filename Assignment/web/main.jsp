@@ -51,7 +51,10 @@
             <div class="calendar">
                 <jsp:include page="frm-add-main.jsp"/>
                 <h2>Calendar</h2>
-                <%= u.getSetting().getA_Time1().toLocalTime() %>
+                <%--<%= u.getSetting().getA_Time1().toLocalTime() %>--%>
+                <jsp:include page="calendar.jsp">
+                    <jsp:param name="id" value="<%=u.getId()%>"/>
+                </jsp:include>
             </div>
         </div>
         <div class="right" id="right">
